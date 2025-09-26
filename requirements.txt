@@ -1,8 +1,9 @@
-streamlit
-openai
-python-dotenv
-faiss-cpu
-pandas
-tqdm
-pdfplumber
-sentence-transformers
+openai>=1.35.7
+streamlit>=1.36.0
+python-dotenv>=1.0.1
+numpy>=1.26.4
+pandas>=2.2.2
+PyPDF2>=3.0.1
+langchain-community>=0.2.0
+cantools
+docx

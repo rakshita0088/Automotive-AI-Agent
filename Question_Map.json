@@ -1,0 +1,149 @@
+{
+  "AUTOSAR COM stack (single-frame, no CanTp ,no CanTp API)": {
+    "canonical": "AUTOSAR COM stack (single-frame, no CanTp,no CanTp API)",
+    "aliases": [
+      "com stack single frame",
+      "single frame com flow",
+      "communication stack without cantp",
+      "com layer flow",
+      "How does the AUTOSAR stack handle received or transmitted CAN messages and deliver them to the application through PDUR ,COM and RTE layers with apis"
+    ]
+  },
+  "tp_pdu_rx": {
+    "canonical": "Explain the TP-PDU-Rx figure from PDU Router",
+    "aliases": [
+      "explain tp-pdu-rx",
+      "explain tp-pdu-rx figure",
+      "tp-pdu-rx",
+      "describe tp-pdu-rx",
+      "tp-pdu-rx communication flow",
+      "how tp-pdu-rx works in pdu router",
+      "explain pdu router tp-pdu-rx steps",
+      "tp-pdu-rx example"
+    ]
+  },
+  "what_is_com_stack": {
+    "canonical": "What is the AUTOSAR COM stack?",
+    "aliases": [
+      "explain com stack in autosar",
+      "how does autosar communication stack work",
+      "describe the modules in com stack",
+      "can you explain autosar communication layers",
+      "tell me about autosar com modules"
+    ]
+  },
+  "autosar_layered_architecture": {
+    "canonical": "Explain AUTOSAR layered architecture",
+    "aliases": [
+      "explain AUTOSAR architecture",
+      "describe AUTOSAR layers",
+      "autosar stack explanation"
+    ]
+  },
+  "role_of_pdur": {
+    "canonical": "What is the role of PduR?",
+    "aliases": [
+      "explain pdu router in autosar",
+      "why do we need pdur",
+      "what does the pdu router module do",
+      "pdur functionality in autosar",
+      "tell me about pdur responsibilities"
+    ]
+  },
+  "purpose_of_rte": {
+    "canonical": "What is the purpose of RTE?",
+    "aliases": [
+      "role of rte in autosar",
+      "why is rte needed",
+      "explain autosar run-time environment",
+      "what does rte provide",
+      "tell me about rte functionality"
+    ]
+  },
+  "what_is_dcm": {
+    "canonical": "What is the AUTOSAR DCM module?",
+    "aliases": [
+      "explain dcm in autosar",
+      "role of dcm",
+      "what does dcm do",
+      "describe diagnostic communication manager",
+      "dcm module functionality"
+    ]
+  },
+  "dcm_flow": {
+    "canonical": "Explain the AUTOSAR Diagnostic stack flow",
+    "aliases": [
+      "dcm stack flow",
+      "diagnostic communication flow",
+      "dcm dsd pdur flow",
+      "autosar diagnostic stack",
+      "diagnostic flow steps in autosar",
+      "how dcm communicates with dsd and pdur"
+    ]
+  },
+  "what_is_canif": {
+    "canonical": "What is the CAN Interface (CanIf) in AUTOSAR?",
+    "aliases": [
+      "explain can interface",
+      "role of canif module",
+      "what does canif do",
+      "canif functionality in autosar",
+      "describe canif module responsibilities"
+    ]
+  },
+  "what_is_candriver": {
+    "canonical": "What is the CAN Driver in AUTOSAR?",
+    "aliases": [
+      "explain can driver",
+      "role of can driver module",
+      "what does can driver do",
+      "describe can driver functionality",
+      "can driver responsibilities"
+    ]
+  },
+  "what_is_cantp": {
+    "canonical": "What is CanTp in AUTOSAR?",
+    "aliases": [
+      "explain can transport protocol",
+      "role of cantp module",
+      "what does cantp do",
+      "describe cantp functionality",
+      "cantp module responsibilities"
+    ]
+  },
+  "what_is_nm": {
+    "canonical": "What is the Network Management (NM) module in AUTOSAR?",
+    "aliases": [
+      "explain nm in autosar",
+      "role of network management module",
+      "what does nm do",
+      "describe nm functionality",
+      "nm module responsibilities"
+    ]
+  },
+  "module_parameters_template": {
+    "canonical": "What are the configuration parameters of MODULE_NAME?",
+    "aliases": [
+      "module_name parameters",
+      "configuration of module_name",
+      "list module_name parameters",
+      "module_name module settings"
+    ],
+    "config": {
+      "Container1": {
+        "Subcontainer1": {
+          "Parameter1": "Description or reference",
+          "Parameter2": "Description or reference"
+        },
+        "Subcontainer2": {
+          "Parameter1": "Description or reference"
+        }
+      },
+      "Container2": {
+        "Subcontainer1": {
+          "Parameter1": "Description or reference"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,160 @@
+question,answer
+list the  transfer properties ?,"### Transfer Properties
+
+1. **TRIGGERED**
+   - Description: At any send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall immediately initiate `ComTxModeNumberOfRepetitions` plus one transmissions of the assigned I-PDU.
+
+2. **TRIGGERED_WITHOUT_REPETITION**
+   - Description: At any send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall immediately initiate one transmission of the assigned I-PDU.
+
+3. **TRIGGERED_ON_CHANGE**
+   - Description: At a send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall initiate `ComTxModeNumberOfRepetitions` plus one transmissions of the assigned I-PDU if the new sent signal differs from the locally stored (last sent or init) in length or value.
+
+4. **TRIGGERED_ON_CHANGE_WITHOUT_REPETITION**
+   - Description: At a send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall initiate one transmission of the assigned I-PDU if the new sent signal differs from the locally stored (last sent or init) in length or value.
+
+5. **PENDING**
+   - Description: Defines if a write access to this signal can trigger the transmission of the corresponding I-PDU. If the I-PDU is triggered, it depends also on the transmission mode of the corresponding I-PDU.
+
+### Additional Notes
+- The AUTOSAR COM module does not support the transfer properties **TRIGGERED_ON_CHANGE** and **TRIGGERED_ON_CHANGE_WITHOUT_REPETITION** for signals and group signals with `ComBitSize` configured to 0."
+list the  transfer properties ?,"### Transfer Properties
+
+1. **TRIGGERED**
+   - Description: At any send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall immediately initiate `ComTxModeNumberOfRepetitions` plus one transmissions of the assigned I-PDU.
+
+2. **TRIGGERED_WITHOUT_REPETITION**
+   - Description: At any send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall immediately initiate one transmission of the assigned I-PDU.
+
+3. **TRIGGERED_ON_CHANGE**
+   - Description: At a send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall initiate `ComTxModeNumberOfRepetitions` plus one transmissions of the assigned I-PDU if the new sent signal differs from the locally stored (last sent or init) in length or value.
+
+4. **TRIGGERED_ON_CHANGE_WITHOUT_REPETITION**
+   - Description: At a send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall initiate one transmission of the assigned I-PDU if the new sent signal differs from the locally stored (last sent or init) in length or value.
+
+5. **PENDING**
+   - Description: Defines if a write access to this signal can trigger the transmission of the corresponding I-PDU. If the I-PDU is triggered, it depends also on the transmission mode of the corresponding I-PDU.
+
+### Additional Notes
+- The AUTOSAR COM module does not support the transfer properties **TRIGGERED_ON_CHANGE** and **TRIGGERED_ON_CHANGE_WITHOUT_REPETITION** for signals and group signals with `ComBitSize` configured to 0."
+explain transfer properties,"### Transfer Properties
+
+1. **TRIGGERED**
+   - **Description**: At any send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall immediately initiate `ComTxModeNumberOfRepetitions` plus one transmissions of the assigned I-PDU.
+
+2. **TRIGGERED_WITHOUT_REPETITION**
+   - **Description**: At any send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall immediately initiate one transmission of the assigned I-PDU.
+
+3. **TRIGGERED_ON_CHANGE**
+   - **Description**: At a send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall initiate `ComTxModeNumberOfRepetitions` plus one transmissions of the assigned I-PDU if the new sent signal differs from the locally stored (last sent or init) in length or value.
+
+4. **TRIGGERED_ON_CHANGE_WITHOUT_REPETITION**
+   - **Description**: At a send request of a signal assigned to an I-PDU with this property, the AUTOSAR COM module shall initiate one transmission of the assigned I-PDU if the new sent signal differs from the locally stored (last sent or init) in length or value.
+
+5. **PENDING**
+   - **Description**: Defines if a write access to this signal can trigger the transmission of the corresponding I-PDU. If the I-PDU is triggered, it depends also on the transmission mode of the corresponding I-PDU.
+
+### Additional Notes
+- The AUTOSAR COM module does not support the transfer properties **TRIGGERED_ON_CHANGE** and **TRIGGERED_ON_CHANGE_WITHOUT_REPETITION** for signals and group signals with `ComBitSize` configured to 0."
+transmission flow for DCM stack from  top to bottom  with all the layer s and api,"Here is the step-by-step transmission flow for the Diagnostic Communication Manager (DCM) stack from top to bottom, including all layers and APIs:
+
+### Step-by-Step Transmission Flow
+
+1. **Application Layer**
+   - **API:** `Xxx_<DiagnosticService>()`
+   - **Purpose:** The application initiates a diagnostic service request, which is processed by the DCM.
+
+2. **RTE (Runtime Environment)**
+   - **API:** Not found in context.
+   - **Purpose:** The RTE facilitates communication between the application and the DCM, forwarding the service request.
+
+3. **Diagnostic Communication Manager (DCM)**
+   - **API:** `Dcm_StartOfReception(PduIdType, PduInfoType*)`
+   - **Purpose:** The DCM receives the diagnostic request and prepares to copy the incoming data.
+
+4. **DCM Internal Processing**
+   - **API:** `Dcm_CopyRxData(PduIdType, PduInfoType*, PduLengthType*)`
+   - **Purpose:** The DCM copies the received data from the provided buffer into its internal buffer.
+
+5. **PDU Router (PduR)**
+   - **API:** `PduR_DcmTransmit(PduIdType, const PduInfoType*)`
+   - **Purpose:** The DCM requests the PDU Router to transmit the diagnostic response to the appropriate transport layer.
+
+6. **Transport Protocol Layer (e.g., CanTp)**
+   - **API:** `CanTp_Transmit(PduIdType, const PduInfoType*)`
+   - **Purpose:** The transport protocol layer handles the transmission of the PDU over the network (e.g., CAN, LIN, FlexRay).
+
+7. **Lower Layer Communication Interface (e.g., CanIf)**
+   - **API:** `CanIf_Transmit(PduIdType, const PduInfoType*)`
+   - **Purpose:** The lower layer communication interface sends the PDU to the physical layer for transmission over the network.
+
+8. **Physical Layer**
+   - **API:** Not found in context.
+   - **Purpose:** The physical layer transmits the data over the communication medium (e.g., CAN bus).
+
+### Confirmation Flow (from bottom to top)
+
+1. **Physical Layer**
+   - **API:** Not found in context.
+   - **Purpose:** The physical layer confirms the successful transmission of the data.
+
+2. **Lower Layer Communication Interface (e.g., CanIf)**
+   - **API:** `CanIf_Transmit(PduIdType, const PduInfoType*)`
+   - **Purpose:** The lower layer communication interface confirms the transmission to the transport layer.
+
+3. **Transport Protocol Layer (e.g., CanTp)**
+   - **API:** `CanTp_TxConfirmation(PduIdType, Std_ReturnType)`
+   - **Purpose:** The transport protocol layer confirms the transmission to the PDU Router.
+
+4. **PDU Router (PduR)**
+   - **API:** `PduR_TpTxConfirmation(PduIdType, Std_ReturnType)`
+   - **Purpose:** The PDU Router confirms the transmission to the DCM.
+
+5. **DCM Internal Processing**
+   - **API:** `Dcm_TpTxConfirmation(PduIdType, Std_ReturnType)`
+   - **Purpose:** The DCM processes the confirmation and may trigger further actions based on the result.
+
+6. **RTE (Runtime Environment)**
+   - **API:** Not found in context.
+   - **Purpose:** The RTE facilitates communication back to the application layer regarding the transmission status.
+
+7. **Application Layer**
+   - **API:** Not found in context.
+   - **Purpose:** The application receives the confirmation of the diagnostic service request processing.
+
+This flow outlines the complete transmission process from the application layer down to the physical layer and back up, detailing the interactions and APIs involved at each step."
+reception flow for DCM stack from  bottom to top   with all the layer s and api,"### Step-by-Step Reception Flow for the Diagnostic Communication Manager (DCM) Stack
+
+1. **Physical Layer**
+   - **API:** Not found in context.
+   - **Purpose:** The physical layer receives the data from the communication medium (e.g., CAN bus) and passes it to the lower layer communication interface.
+
+2. **Lower Layer Communication Interface (e.g., CanIf)**
+   - **API:** `CanIf_RxIndication(PduIdType, const PduInfoType*)`
+   - **Purpose:** The CanIf module notifies the transport layer (e.g., CanTp) about the reception of a new L-PDU (Logical Protocol Data Unit).
+
+3. **Transport Protocol Layer (e.g., CanTp)**
+   - **API:** `CanTp_RxIndication(PduIdType, const PduInfoType*)`
+   - **Purpose:** The transport layer receives the indication from the lower layer and processes the incoming data, determining if it is a single frame or part of a multi-frame transmission.
+
+4. **PDU Router (PduR)**
+   - **API:** `PduR_CanTpStartOfReception(PduIdType, const PduInfoType*, PduLengthType, PduLengthType*)`
+   - **Purpose:** The transport layer requests the PDU Router to allocate a buffer for the incoming data and provides the necessary information about the data length.
+
+5. **Diagnostic Communication Manager (DCM)**
+   - **API:** `Dcm_StartOfReception(PduIdType, const PduInfoType*)`
+   - **Purpose:** The DCM is notified by the PDU Router that a new diagnostic request has started, and it prepares to receive the data.
+
+6. **DCM Internal Processing**
+   - **API:** `Dcm_CopyRxData(PduIdType, PduInfoType*, PduLengthType*)`
+   - **Purpose:** The DCM copies the received data from the provided buffer into its internal buffer for further processing.
+
+7. **RTE (Runtime Environment)**
+   - **API:** Not found in context.
+   - **Purpose:** The RTE facilitates communication between the application and the DCM, forwarding the diagnostic request to the appropriate application layer.
+
+8. **Application Layer**
+   - **API:** `Xxx_<DiagnosticService>()`
+   - **Purpose:** The application processes the diagnostic request and may send a response back through the DCM.
+
+This flow outlines the complete reception process from the physical layer up to the application layer, detailing the interactions and APIs involved at each step."
