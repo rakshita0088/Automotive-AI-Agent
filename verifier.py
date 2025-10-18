@@ -7,23 +7,23 @@ import re
 import json
 import os
 from openai import OpenAI
-
+ 
 MODEL = "gpt-4o-mini"
 PASS_THRESHOLD = 85
 MAX_RETRIES = 2
-
+ 
 def _get_api_key():
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("OPENAI_API_KEY not found")
     return api_key
-
+ 
 _client = OpenAI(api_key=_get_api_key())
-
+ 
 class Verifier:
     def __init__(self, model=MODEL):
         self.model = model
-
+ 
     def verify(self, question, ai_answer, context, module):
         """
         Verifies AI answer against module context.
@@ -31,27 +31,27 @@ class Verifier:
         """
         if not ai_answer or ai_answer.startswith("[Error"):
             return {"score": 0, "feedback": "No valid AI answer returned", "status": "FAIL"}
-
+ 
         trimmed_context = (context or "")#[:100000]
-
+ 
         prompt = f"""
 You are an AUTOSAR expert evaluator.
-
+ 
 Question:
 {question}
-
+ 
 AI Answer:
 {ai_answer}
-
+ 
 Context (trimmed):
 {trimmed_context}
-
+ 
 Evaluate the AI answer for correctness and completeness relative to the provided context.
 Return ONLY a JSON object exactly in this format:
 {{"score": <integer 0-100>, "feedback": "<short reason>", "status": "PASS" or "FAIL"}}
 Pass if score >= {PASS_THRESHOLD}.
 """
-
+ 
         for attempt in range(MAX_RETRIES):
             try:
                 resp = _client.chat.completions.create(
@@ -70,5 +70,5 @@ Pass if score >= {PASS_THRESHOLD}.
                     return {"score": score, "feedback": feedback, "status": status}
             except Exception as e:
                 print(f"⚠️ Verifier attempt failed: {e}")
-
+ 
         return {"score": 0, "feedback": "Verifier failed to return JSON", "status": "FAIL"}
